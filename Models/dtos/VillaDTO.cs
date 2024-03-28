@@ -1,7 +1,10 @@
+using System.ComponentModel.DataAnnotations;
+
 namespace MyWebApiProject.Models.dtos;
 
 public class VillaDTO
 {
-    public int Id { get; set; }
-    public string Name { get; set; }
+    [Required] public int Id { get; set; }
+
+    [Required] public string Name { get; set; }
 }
