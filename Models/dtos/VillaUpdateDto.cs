@@ -1,9 +1,11 @@
+using System.ComponentModel.DataAnnotations;
+
 namespace MyWebApiProject.Models.dtos;
 
-public class VillaDTO
+public class VillaUpdateDto
 {
-    
-    public int Id { get; set; }
+    [Required] public int Id { get; set; }
+
     public string Name { get; set; }
     public string Details { get; set; }
     public double Rate { get; set; }
