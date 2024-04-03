@@ -6,11 +6,25 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace MyWebApiProject.Migrations
 {
     /// <inheritdoc />
-    public partial class CreateVilla : Migration
+    public partial class InitialMigration : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.CreateTable(
+                name: "VillaNumbers",
+                columns: table => new
+                {
+                    VillaNo = table.Column<int>(type: "int", nullable: false),
+                    SpecialDetail = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    UpdatedAt = table.Column<DateTime>(type: "datetime2", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_VillaNumbers", x => x.VillaNo);
+                });
+
             migrationBuilder.CreateTable(
                 name: "Villas",
                 columns: table => new
@@ -31,11 +45,19 @@ namespace MyWebApiProject.Migrations
                 {
                     table.PrimaryKey("PK_Villas", x => x.Id);
                 });
+
+            migrationBuilder.InsertData(
+                table: "Villas",
+                columns: new[] { "Id", "Amenity", "CreatedAt", "Details", "ImageUrl", "Name", "Occupancy", "Rate", "SQft", "UpdatedAt" },
+                values: new object[] { 1, "Villa 1 Amenity", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Villa 1 Description", "https://via.placeholder.com/150", "Villa 1", 20, 1000.0, 5000, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified) });
         }
 
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.DropTable(
+                name: "VillaNumbers");
+
             migrationBuilder.DropTable(
                 name: "Villas");
         }

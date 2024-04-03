@@ -12,8 +12,8 @@ using MyWebApiProject.Data;
 namespace MyWebApiProject.Migrations
 {
     [DbContext(typeof(AppliationDbContext))]
-    [Migration("20240331123936_CreateVilla")]
-    partial class CreateVilla
+    [Migration("20240403143045_InitialMigration")]
+    partial class InitialMigration
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -67,6 +67,41 @@ namespace MyWebApiProject.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Villas");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Amenity = "Villa 1 Amenity",
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Details = "Villa 1 Description",
+                            ImageUrl = "https://via.placeholder.com/150",
+                            Name = "Villa 1",
+                            Occupancy = 20,
+                            Rate = 1000.0,
+                            SQft = 5000,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        });
+                });
+
+            modelBuilder.Entity("MyWebApiProject.Models.VillaNumber", b =>
+                {
+                    b.Property<int>("VillaNo")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime?>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("SpecialDetail")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("UpdatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("VillaNo");
+
+                    b.ToTable("VillaNumbers");
                 });
 #pragma warning restore 612, 618
         }
